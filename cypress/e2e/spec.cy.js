@@ -2,10 +2,14 @@ describe("App", () => {
   it("loads", () => {
     cy.visit("/")
     cy.contains("header", "Notionesque")
+    cy.get('[data-cy="zero-tasks"]').should("be.visible")
   })
 
   it("creates a task", () => {
-    cy.visit("/")
+    cy.visit("/").wait(100)
+    cy.contains("header", "Notionesque")
+    cy.get('[data-cy="zero-tasks"]').should("be.visible")
+    cy.get('[data-cy="search-input"]').should("be.visible")
     cy.contains("button", "Create Task").click()
 
     const task = {

@@ -337,6 +337,7 @@ const ListView: React.FC = () => {
                 <td
                   colSpan={6}
                   className="px-6 py-10 text-center text-gray-500"
+                  data-cy="zero-tasks"
                 >
                   No tasks found. Create a new task to get started.
                 </td>
