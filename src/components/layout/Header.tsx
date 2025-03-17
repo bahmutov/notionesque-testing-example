@@ -74,6 +74,7 @@ const Header: React.FC = () => {
                     ? "bg-gray-200 text-gray-800"
                     : "text-gray-600 hover:bg-gray-100"
                 }`}
+                data-active={viewMode === "list"}
               >
                 List
               </button>
@@ -84,6 +85,7 @@ const Header: React.FC = () => {
                     ? "bg-gray-200 text-gray-800"
                     : "text-gray-600 hover:bg-gray-100"
                 }`}
+                data-active={viewMode === "kanban"}
               >
                 Kanban
               </button>

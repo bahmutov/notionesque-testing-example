@@ -40,6 +40,51 @@ describe("App", () => {
       })
   })
 
+  it("shows tasks in Kanban view", () => {
+    cy.step("Create a task")
+    cy.visit("/").wait(100)
+    cy.contains("header", "Notionesque")
+    cy.get('[data-cy="zero-tasks"]').should("be.visible")
+    cy.get('[data-cy="search-input"]').should("be.visible")
+    cy.contains("button", "List").should("have.attr", "data-active", "true")
+    cy.contains("button", "Kanban").should("have.attr", "data-active", "false")
+    cy.contains("button", "Create Task").click()
+
+    const task = {
+      title: "Test Task",
+      description: "Test Task Description",
+    }
+    cy.get("form[data-cy=task-form]")
+      .should("be.visible")
+      .within(() => {
+        cy.get("input[name=title]").type(task.title)
+        cy.get("textarea[name=description]").type(task.description)
+        cy.contains("button", "Create").click()
+      })
+    cy.get("form[data-cy=task-form]").should("not.exist")
+    cy.step("Task in List view")
+    cy.get('[data-cy="task-row"]').should("have.length", 1)
+    cy.step("Task in Kanban view")
+    cy.contains("button", "Kanban").click()
+    cy.contains("button", "Kanban").should("have.attr", "data-active", "true")
+    cy.contains("button", "List").should("have.attr", "data-active", "false")
+
+    cy.step("Kanban view")
+    cy.get('[data-cy="kanban-view"]').should("be.visible")
+    cy.get('[data-cy="kanban-column-title"]').should("read", [
+      "None (1)",
+      "Low (0)",
+      "Medium (0)",
+      "High (0)",
+      "Urgent (0)",
+    ])
+    cy.step('Task in "None" column')
+    cy.get('[data-cy="kanban-view"]')
+      .contains('[data-cy="kanban-column"]', "None")
+      .find("[data-cy=kanban-card]")
+      .should("have.length", 1)
+  })
+
   it("edits a task", () => {
     cy.step("Create a task")
     cy.visit("/").wait(100)
