@@ -7,10 +7,7 @@ describe("App", () => {
 
   it("creates a task", () => {
     cy.step("Create a task")
-    cy.visit("/").wait(100)
-    cy.contains("header", "Notionesque")
-    cy.get('[data-cy="zero-tasks"]').should("be.visible")
-    cy.get('[data-cy="search-input"]').should("be.visible")
+    cy.home()
     cy.contains("button", "Create Task").click()
 
     const task = {
@@ -42,10 +39,7 @@ describe("App", () => {
 
   it("shows tasks in Kanban view", () => {
     cy.step("Create a task")
-    cy.visit("/").wait(100)
-    cy.contains("header", "Notionesque")
-    cy.get('[data-cy="zero-tasks"]').should("be.visible")
-    cy.get('[data-cy="search-input"]').should("be.visible")
+    cy.home()
     cy.contains("button", "List").should("have.attr", "data-active", "true")
     cy.contains("button", "Kanban").should("have.attr", "data-active", "false")
     cy.contains("button", "Create Task").click()
@@ -87,10 +81,7 @@ describe("App", () => {
 
   it("edits a task", () => {
     cy.step("Create a task")
-    cy.visit("/").wait(100)
-    cy.contains("header", "Notionesque")
-    cy.get('[data-cy="zero-tasks"]').should("be.visible")
-    cy.get('[data-cy="search-input"]').should("be.visible")
+    cy.home()
     cy.contains("button", "Create Task").click()
 
     const task = {
@@ -144,10 +135,7 @@ describe("App", () => {
 
   it("deletes a task", () => {
     cy.step("Create a task")
-    cy.visit("/").wait(100)
-    cy.contains("header", "Notionesque")
-    cy.get('[data-cy="zero-tasks"]').should("be.visible")
-    cy.get('[data-cy="search-input"]').should("be.visible")
+    cy.home()
     cy.contains("button", "Create Task").click()
 
     const task = {
@@ -173,10 +161,7 @@ describe("App", () => {
 
   it("updates task priority", () => {
     cy.step("Create a task")
-    cy.visit("/").wait(100)
-    cy.contains("header", "Notionesque")
-    cy.get('[data-cy="zero-tasks"]').should("be.visible")
-    cy.get('[data-cy="search-input"]').should("be.visible")
+    cy.home()
     cy.contains("button", "Create Task").click()
 
     const task = {
@@ -214,30 +199,109 @@ describe("App", () => {
 
   it("deletes all selected tasks", () => {
     cy.step("Create a task")
-    cy.visit("/").wait(100)
-    cy.contains("header", "Notionesque")
-    cy.get('[data-cy="zero-tasks"]').should("be.visible")
-    cy.get('[data-cy="search-input"]').should("be.visible")
-    cy.contains("button", "Create Task").click()
+    cy.home()
 
     const task = {
       title: "Test Task",
       description: "Test Task Description",
     }
-    cy.get("form[data-cy=task-form]")
-      .should("be.visible")
-      .within(() => {
-        cy.get("input[name=title]").type(task.title)
-        cy.get("textarea[name=description]").type(task.description)
-        cy.contains("button", "Create").click()
-      })
-    cy.get("form[data-cy=task-form]").should("not.exist")
+    cy.addTask(task.title, task.description)
+
     cy.step("Edit the task")
     cy.get('[data-cy="task-row"]').should("have.length", 1)
 
     cy.get('[data-cy="select-all"]').check()
     cy.get('[data-cy="selected-tasks"]').should("have.text", "1 task selected")
+
+    cy.step("Stub the window.confirm call")
+    cy.window().then(win => {
+      cy.stub(win, "confirm").as("confirm").returns(true)
+    })
     cy.contains("button", "Delete Selected").click()
+    cy.get("@confirm").should(
+      "have.been.calledOnceWithExactly",
+      "Are you sure you want to delete 1 tasks?",
+    )
     cy.get('[data-cy="zero-tasks"]').should("be.visible")
+  })
+
+  it("does not delete all tasks if the user cancels", () => {
+    cy.step("Create a task")
+    cy.home()
+
+    const task = {
+      title: "Test Task",
+      description: "Test Task Description",
+    }
+    cy.addTask(task.title, task.description)
+
+    cy.step("Edit the task")
+    cy.get('[data-cy="task-row"]').should("have.length", 1)
+
+    cy.get('[data-cy="select-all"]').check()
+    cy.get('[data-cy="selected-tasks"]').should("have.text", "1 task selected")
+
+    cy.step("Stub the window.confirm call")
+    cy.window().then(win => {
+      cy.stub(win, "confirm").as("confirm").returns(false)
+    })
+    cy.contains("button", "Delete Selected").click()
+    cy.get("@confirm").should(
+      "have.been.calledOnceWithExactly",
+      "Are you sure you want to delete 1 tasks?",
+    )
+    cy.get('[data-cy="zero-tasks"]').should("not.exist")
+    cy.get('[data-cy="task-row"]').should("have.length", 1)
+  })
+
+  it("sorts tasks by title", () => {
+    cy.step("Create 3 tasks")
+    cy.home()
+    cy.addTask("Task 1", "Task 1 Description")
+    cy.addTask("Task 2", "Task 2 Description")
+    cy.addTask("Task 3", "Task 3 Description")
+    cy.get('[data-cy="task-row"]').should("have.length", 3)
+
+    cy.step('Sort by "Title" descending')
+    cy.get('[data-cy="task-title-header"]').click()
+    cy.get('[data-cy="task-title-header"]').should("have.text", "Title ↓")
+    cy.get("[data-cy=task-title]").should("read", [
+      "Task 3",
+      "Task 2",
+      "Task 1",
+    ])
+
+    cy.step('Sort by "Title" ascending')
+    cy.get('[data-cy="task-title-header"]').click()
+    cy.get('[data-cy="task-title-header"]').should("have.text", "Title ↑")
+    cy.get("[data-cy=task-title]").should("read", [
+      "Task 1",
+      "Task 2",
+      "Task 3",
+    ])
+  })
+
+  it("sorts tasks by priority", () => {
+    cy.step("Create 3 tasks")
+    cy.home()
+    cy.addTask("Task 1", "Task 1 Description", "Low")
+    cy.addTask("Task 2", "Task 2 Description", "High")
+    cy.addTask("Task 3", "Task 3 Description")
+    cy.get('[data-cy="task-row"]').should("have.length", 3)
+
+    cy.step('Sort by "Priority" ascending')
+    cy.get('[data-cy="task-priority-header"]').click()
+    cy.get('[data-cy="task-priority-header"]').should("have.text", "Priority ↓")
+    cy.get("[data-cy=task-priority]").should("read", ["none", "low", "high"])
+    cy.get("[data-cy=task-title]").should("read", [
+      "Task 3",
+      "Task 1",
+      "Task 2",
+    ])
+
+    cy.step('Sort by "Priority" descending')
+    cy.get('[data-cy="task-priority-header"]').click()
+    cy.get('[data-cy="task-priority-header"]').should("have.text", "Priority ↑")
+    cy.get("[data-cy=task-priority]").should("read", ["high", "low", "none"])
   })
 })
