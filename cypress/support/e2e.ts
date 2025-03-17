@@ -14,7 +14,12 @@ Cypress.Commands.add("home", () => {
 
 Cypress.Commands.add(
   "addTask",
-  (title: string, description: string, priority?: string) => {
+  (
+    title: string,
+    description: string,
+    priority?: Cypress.priority,
+    status?: Cypress.status,
+  ) => {
     cy.section(`Add task "${title}"`)
     cy.contains("button", "Create Task").click()
 
@@ -23,6 +28,10 @@ Cypress.Commands.add(
       .within(() => {
         cy.get("input[name=title]").type(title)
         cy.get("textarea[name=description]").type(description)
+
+        if (status) {
+          cy.get('[data-cy="status-select"]').select(status)
+        }
         if (priority) {
           cy.get('[data-cy="priority-select"]').select(priority)
         }

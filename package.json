@@ -14,7 +14,10 @@
     "lint:fix": "eslint --fix .",
     "type-check": "tsc --noEmit",
     "cy:open": "cypress open",
-    "local": "start-test dev http://localhost:5173/ cy:open"
+    "cy:run": "cypress run",
+    "local": "start-test dev http://localhost:5173/ cy:open",
+    "clean": "rm -rf coverage .nyc_output",
+    "e2e": "start-test dev http://localhost:5173/ cy:run"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
