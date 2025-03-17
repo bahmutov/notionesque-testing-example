@@ -211,7 +211,10 @@ const ListView: React.FC = () => {
       {/* Bulk actions bar */}
       {selectedTaskIds.size > 0 && (
         <div className="bg-blue-50 px-4 py-2 flex items-center justify-between border-b">
-          <span className="text-sm text-blue-700 font-medium">
+          <span
+            className="text-sm text-blue-700 font-medium"
+            data-cy="selected-tasks"
+          >
             {selectedTaskIds.size}{" "}
             {selectedTaskIds.size === 1 ? "task" : "tasks"} selected
           </span>
@@ -238,6 +241,7 @@ const ListView: React.FC = () => {
                   }
                   onChange={toggleSelectAll}
                   className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  data-cy="select-all"
                 />
               </th>
               <th
