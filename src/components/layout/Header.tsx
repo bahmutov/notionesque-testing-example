@@ -111,6 +111,7 @@ const Header: React.FC = () => {
               value={filterConfig.status}
               onChange={handleStatusFilterChange}
               className="px-4 py-2 border rounded-md"
+              data-cy="search-status-filter"
             >
               <option value="all">All Status</option>
               <option value="not started">Not Started</option>
@@ -122,6 +123,7 @@ const Header: React.FC = () => {
               value={filterConfig.priority}
               onChange={handlePriorityFilterChange}
               className="px-4 py-2 border rounded-md"
+              data-cy="search-priority-filter"
             >
               <option value="all">All Priorities</option>
               <option value="none">None</option>
