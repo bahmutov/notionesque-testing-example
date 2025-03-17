@@ -30,6 +30,7 @@
     "vite-plugin-istanbul": "^7.0.0"
   },
   "devDependencies": {
+    "@bahmutov/cypress-code-coverage": "^2.7.2",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.2.0",
     "@testing-library/react": "^14.1.2",
