@@ -1,4 +1,4 @@
-# notionesque-testing-example [![ci](https://github.com/bahmutov/notionesque-testing-example/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bahmutov/notionesque-testing-example/actions/workflows/ci.yml)
+# notionesque-testing-example [![ci](https://github.com/bahmutov/notionesque-testing-example/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bahmutov/notionesque-testing-example/actions/workflows/ci.yml) ![check-code-coverage](https://img.shields.io/badge/code--coverage-69.94%25-yellow)
 
 > Example Cypress tests for a modern web app
 

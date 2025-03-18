@@ -1,0 +1,26 @@
+name: code-coverage-badge
+on:
+  schedule:
+    - cron: "0 0 * * *"
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v4
+
+      - name: Run tests 🧪
+        uses: cypress-io/github-action@v6
+        with:
+          start: npm run dev
+
+      - name: Generate coverage badge 🏷️
+        run: npx update-badge
+
+      - name: commit updated README
+        # https://github.com/stefanzweifel/git-auto-commit-action
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Updated code coverage badge
+          branch: main
+          file_pattern: README.md
