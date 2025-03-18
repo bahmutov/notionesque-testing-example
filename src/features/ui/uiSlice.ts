@@ -106,13 +106,3 @@ export const {
 
 // Export the reducer
 export default uiSlice.reducer
-
-// Selectors
-export const selectViewMode = (state: { ui: UiState }) => state.ui.viewMode
-export const selectSortConfig = (state: { ui: UiState }) => state.ui.sortConfig
-export const selectFilterConfig = (state: { ui: UiState }) =>
-  state.ui.filterConfig
-export const selectIsTaskModalOpen = (state: { ui: UiState }) =>
-  state.ui.isTaskModalOpen
-export const selectEditingTaskId = (state: { ui: UiState }) =>
-  state.ui.editingTaskId
