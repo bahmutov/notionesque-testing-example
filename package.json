@@ -33,6 +33,7 @@
     "vite-plugin-istanbul": "^7.0.0"
   },
   "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.3.0",
     "@bahmutov/cypress-code-coverage": "^2.7.2",
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^6.2.0",
@@ -44,6 +45,7 @@
     "cypress": "^14.2.0",
     "cypress-map": "^1.45.1",
     "cypress-plugin-steps": "^1.1.1",
+    "cypress-real-events": "^1.14.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-react-app": "^7.0.1",

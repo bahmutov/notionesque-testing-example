@@ -1,9 +1,8 @@
 // https://github.com/bahmutov/cypress-code-coverage
 import "@bahmutov/cypress-code-coverage/support"
-
 import "cypress-plugin-steps"
-
 import "cypress-map"
+import "cypress-real-events"
 
 Cypress.Commands.add("home", () => {
   cy.visit("/").wait(100)

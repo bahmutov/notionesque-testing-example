@@ -133,9 +133,14 @@ const KanbanView: React.FC = () => {
 
   // Task card component
   const TaskCard = ({ task }: { task: Task }) => (
-    <div className="bg-white rounded shadow p-3 border border-gray-200 hover:shadow-md transition-shadow">
+    <div
+      className="bg-white rounded shadow p-3 border border-gray-200 hover:shadow-md transition-shadow"
+      data-cy="task-card"
+    >
       <div className="flex justify-between items-start">
-        <h4 className="font-medium text-gray-900">{task.title}</h4>
+        <h4 className="font-medium text-gray-900" data-cy="title">
+          {task.title}
+        </h4>
       </div>
 
       {task.description && (
@@ -197,6 +202,7 @@ const KanbanView: React.FC = () => {
               key={priority}
               className={`flex-shrink-0 w-72 rounded-lg border-t-4 ${getPriorityColorClass(priority as TaskPriority)}`}
               data-cy="kanban-column"
+              data-column={`priority-${priority}`}
             >
               <div className="bg-white rounded-b-lg shadow h-full flex flex-col">
                 <div className="p-3 border-b bg-gray-50">
@@ -214,7 +220,6 @@ const KanbanView: React.FC = () => {
                       className={`flex-1 p-2 overflow-y-auto min-h-[200px] ${
                         snapshot.isDraggingOver ? "bg-blue-50" : "bg-gray-50"
                       }`}
-                      data-cy="kanban-card"
                     >
                       {priorityTasks.length === 0 ? (
                         <p className="text-gray-400 text-sm text-center py-4">
@@ -234,6 +239,7 @@ const KanbanView: React.FC = () => {
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
                                   className={`${snapshot.isDragging ? "opacity-70" : ""}`}
+                                  data-cy="kanban-card"
                                 >
                                   <TaskCard task={task} />
                                 </div>
