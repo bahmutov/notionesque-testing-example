@@ -152,6 +152,7 @@ const KanbanView: React.FC = () => {
       <div className="mt-3 flex items-center justify-between">
         <span
           className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusBadgeClass(task.status)}`}
+          data-cy="status"
         >
           {task.status}
         </span>
@@ -225,7 +226,10 @@ const KanbanView: React.FC = () => {
                       }`}
                     >
                       {priorityTasks.length === 0 ? (
-                        <p className="text-gray-400 text-sm text-center py-4">
+                        <p
+                          className="text-gray-400 text-sm text-center py-4"
+                          data-cy="no-tasks"
+                        >
                           No tasks
                         </p>
                       ) : (

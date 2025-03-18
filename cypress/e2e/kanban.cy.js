@@ -107,4 +107,46 @@ describe("App Kanban", () => {
       .should("have.text", "Updated task")
       .scrollIntoView()
   })
+
+  it("shows cards with different statuses", () => {
+    cy.step("Create 3 tasks")
+    cy.home()
+    cy.addTask("Write code", "Write code description", "none", "Not Started")
+    cy.addTask("Write tests", "Write tests description", "low", "In Progress")
+    cy.addTask(
+      "Write documentation",
+      "Write documentation description",
+      "high",
+      "Completed",
+    )
+    cy.step("Switch to Kanban view")
+    cy.contains("button", "Kanban").click()
+    cy.get('[data-cy="kanban-view"]').should("be.visible")
+
+    cy.get('[data-column="priority-none"]')
+      .find('[data-cy="kanban-card"]')
+      .should("have.length", 1)
+      .find('[data-cy="status"]')
+      .should("have.text", "not started")
+    cy.get('[data-column="priority-low"]')
+      .find('[data-cy="kanban-card"]')
+      .should("have.length", 1)
+      .find('[data-cy="status"]')
+      .should("have.text", "in progress")
+    cy.get('[data-column="priority-high"]')
+      .find('[data-cy="kanban-card"]')
+      .should("have.length", 1)
+      .find('[data-cy="status"]')
+      .should("have.text", "completed")
+
+    cy.step("Filter by status")
+    cy.get('[data-cy="search-status-filter"]').select("In Progress")
+    cy.get('[data-column="priority-none"]').find("[data-cy=no-tasks]")
+    cy.get('[data-column="priority-low"]')
+      .find('[data-cy="kanban-card"]')
+      .should("have.length", 1)
+    cy.get('[data-column="priority-medium"]').find("[data-cy=no-tasks]")
+    cy.get('[data-column="priority-high"]').find("[data-cy=no-tasks]")
+    cy.get('[data-column="priority-urgent"]').find("[data-cy=no-tasks]")
+  })
 })
