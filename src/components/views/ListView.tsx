@@ -268,6 +268,7 @@ const ListView: React.FC = () => {
               <th
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                 onClick={() => handleSort("updatedAt")}
+                data-cy="task-updated-header"
               >
                 Updated {getSortIndicator("updatedAt")}
               </th>
@@ -319,7 +320,11 @@ const ListView: React.FC = () => {
                     {task.priority}
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td
+                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                  data-cy="task-updated"
+                  data-updated-at={task.updatedAt}
+                >
                   {formatDate(task.updatedAt)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
