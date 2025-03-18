@@ -395,7 +395,7 @@ const ListView: React.FC = () => {
           {/* Desktop pagination */}
           <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
-              <p className="text-sm text-gray-700">
+              <p className="text-sm text-gray-700" data-cy="pagination-info">
                 Showing{" "}
                 <span className="font-medium">
                   {(currentPage - 1) * tasksPerPage + 1}
@@ -460,6 +460,7 @@ const ListView: React.FC = () => {
                     <button
                       key={pageNum}
                       onClick={() => handlePageChange(pageNum)}
+                      data-is-active={currentPage === pageNum}
                       className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                         currentPage === pageNum
                           ? "z-10 bg-blue-50 border-blue-500 text-blue-600"
