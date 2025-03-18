@@ -2,7 +2,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import undoable, { includeAction } from "redux-undo"
 import { v4 as uuidv4 } from "uuid"
-import { Task, TaskStatus, TaskPriority } from "../../types"
+import { Task, TaskPriority } from "../../types"
 
 // Define the state structure for the tasks slice
 interface TasksState {
