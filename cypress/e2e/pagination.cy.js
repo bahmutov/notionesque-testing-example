@@ -85,5 +85,17 @@ describe("App List View", () => {
       "have.text",
       "Showing 51 to 50 of 50 results",
     )
+
+    cy.step("Go to the 3rd page")
+    cy.get('[aria-label="Pagination"]').contains("button", "3").click()
+    cy.get('[data-cy="pagination-info"]').should(
+      "have.text",
+      "Showing 21 to 30 of 50 results",
+    )
+    cy.get('[aria-label="Pagination"]')
+      .should("be.visible")
+      .within(() => {
+        cy.contains("button", "3").should("have.attr", "data-is-active", "true")
+      })
   })
 })
