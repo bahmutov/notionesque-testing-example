@@ -42,6 +42,7 @@
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react": "^4.2.1",
+    "cy-spok": "^1.5.2",
     "cypress": "^14.2.0",
     "cypress-map": "^1.45.1",
     "cypress-plugin-steps": "^1.1.1",
