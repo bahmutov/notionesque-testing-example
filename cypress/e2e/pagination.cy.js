@@ -69,5 +69,21 @@ describe("App List View", () => {
       "have.text",
       "Showing 51 to 60 of 60 results",
     )
+
+    cy.step("Select visible tasks")
+    cy.get('[data-cy="select-all"]').check()
+    cy.get('[data-cy="selected-tasks"]').should(
+      "have.text",
+      "10 tasks selected",
+    )
+    cy.contains("button", "Delete Selected").click()
+
+    cy.step("🚨 Problematic action")
+    // we probable want to reset the pagination instead
+    cy.get('[data-cy="zero-tasks"]').should("be.visible")
+    cy.get('[data-cy="pagination-info"]').should(
+      "have.text",
+      "Showing 51 to 50 of 50 results",
+    )
   })
 })
