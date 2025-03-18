@@ -1,4 +1,4 @@
-# notionesque-testing-example
+# notionesque-testing-example [![ci](https://github.com/bahmutov/notionesque-testing-example/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bahmutov/notionesque-testing-example/actions/workflows/ci.yml)
 
 > Example Cypress tests for a modern web app
 
