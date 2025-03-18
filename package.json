@@ -17,7 +17,8 @@
     "cy:run": "cypress run",
     "local": "start-test dev http://localhost:5173/ cy:open",
     "clean": "rm -rf coverage .nyc_output",
-    "e2e": "start-test dev http://localhost:5173/ cy:run"
+    "e2e": "start-test dev http://localhost:5173/ cy:run",
+    "pree2e": "npm run clean"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
