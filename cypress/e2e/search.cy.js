@@ -23,7 +23,7 @@ describe("App search", () => {
       .should("have.text", "Write code")
   })
 
-  it("filters search results by the status", () => {
+  it("filters search results by the task status", () => {
     cy.step("Create 3 tasks")
     cy.home()
     cy.addTask("Write code", "Write code description", undefined, "In Progress")
@@ -53,5 +53,27 @@ describe("App search", () => {
     cy.get('[data-cy="task-row"]')
       .should("have.length", 1)
       .should("include.text", "Write documentation")
+  })
+
+  it("filters search results by the task priority", () => {
+    cy.step("Create 3 tasks")
+    cy.home()
+    cy.addTask("Write code", "Write code description", "Urgent")
+    cy.addTask("Write tests", "Write tests description", "Medium")
+    cy.addTask("Write documentation", "Write documentation description", "Low")
+    cy.get('[data-cy="task-row"]')
+      .should("have.length", 3)
+      .find('[data-cy="task-priority"]')
+      .should("read", ["low", "medium", "urgent"])
+
+    cy.step('Filter tasks with "Low" priority')
+    cy.get('[data-cy="search-priority-filter"]').select("Low")
+    cy.get('[data-cy="task-row"]')
+      .should("have.length", 1)
+      .should("include.text", "Write documentation")
+
+    cy.step("Show all priorities")
+    cy.get('[data-cy="search-priority-filter"]').select("All Priorities")
+    cy.get('[data-cy="task-row"]').should("have.length", 3)
   })
 })
