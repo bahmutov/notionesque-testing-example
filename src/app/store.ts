@@ -5,7 +5,6 @@ import storage from "redux-persist/lib/storage"
 import tasksReducer from "../features/tasks/tasksSlice"
 import uiReducer from "../features/ui/uiSlice"
 import { clearHistoryMiddleware } from "./clearHistoryMiddleware"
-import { RootState } from "../types"
 
 // Configuration for redux-persist with redux-undo
 const tasksPersistConfig = {
