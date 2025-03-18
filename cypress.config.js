@@ -7,6 +7,7 @@ export default defineConfig({
   e2e: {
     // baseUrl, etc
     baseUrl: "http://localhost:5173/",
+    viewportHeight: 1000,
     setupNodeEvents(on, config) {
       codeCoverage(on, config)
 

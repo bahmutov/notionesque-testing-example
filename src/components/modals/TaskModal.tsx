@@ -202,6 +202,7 @@ const TaskModal: React.FC = () => {
               type="button"
               onClick={toggleCustomFields}
               className="w-full px-4 py-2 bg-gray-50 text-left flex justify-between items-center focus:outline-none"
+              data-cy="toggle-custom-fields"
             >
               <span className="font-medium text-gray-700">
                 Custom Fields{" "}
@@ -224,7 +225,7 @@ const TaskModal: React.FC = () => {
 
             {/* Collapsible content */}
             {showCustomFields && (
-              <div className="p-4 border-t">
+              <div className="p-4 border-t" data-cy="custom-fields">
                 {/* List existing custom fields */}
                 {Object.entries(customFields).length > 0 && (
                   <div className="mb-4 bg-gray-50 rounded-md p-3">
@@ -232,12 +233,19 @@ const TaskModal: React.FC = () => {
                       <div
                         key={name}
                         className="flex items-center justify-between py-2 border-b last:border-b-0"
+                        data-cy="custom-field"
                       >
                         <div className="flex flex-col mr-2 overflow-hidden">
-                          <span className="font-medium text-sm text-gray-800">
+                          <span
+                            className="font-medium text-sm text-gray-800"
+                            data-cy="custom-field-name"
+                          >
                             {name}
                           </span>
-                          <span className="text-gray-600 truncate">
+                          <span
+                            className="text-gray-600 truncate"
+                            data-cy="custom-field-value"
+                          >
                             {value}
                           </span>
                         </div>
@@ -245,6 +253,7 @@ const TaskModal: React.FC = () => {
                           type="button"
                           onClick={() => handleRemoveCustomField(name)}
                           className="text-red-600 hover:text-red-800 text-sm px-2 py-1 flex-shrink-0"
+                          data-cy="custom-field-delete"
                         >
                           Delete
                         </button>
@@ -254,7 +263,7 @@ const TaskModal: React.FC = () => {
                 )}
 
                 {/* Add new custom field - using vertical layout for more space */}
-                <div className="mt-3">
+                <div className="mt-3" data-cy="add-custom-field">
                   <div className="flex flex-col space-y-2">
                     <div className="w-full">
                       <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -266,6 +275,7 @@ const TaskModal: React.FC = () => {
                         value={newFieldName}
                         onChange={e => setNewFieldName(e.target.value)}
                         className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        data-cy="new-custom-field-name"
                       />
                     </div>
                     <div className="w-full">
@@ -278,6 +288,7 @@ const TaskModal: React.FC = () => {
                         value={newFieldValue}
                         onChange={e => setNewFieldValue(e.target.value)}
                         className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        data-cy="new-custom-field-value"
                       />
                     </div>
                   </div>
@@ -285,6 +296,7 @@ const TaskModal: React.FC = () => {
                     type="button"
                     onClick={handleAddCustomField}
                     disabled={!newFieldName.trim() || !newFieldValue.trim()}
+                    data-cy="add-new-custom-field"
                     className={`mt-3 w-full px-4 py-2 rounded-md transition-colors ${
                       !newFieldName.trim() || !newFieldValue.trim()
                         ? "bg-blue-300 cursor-not-allowed"

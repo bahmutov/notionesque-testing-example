@@ -174,11 +174,14 @@ const KanbanView: React.FC = () => {
 
       {/* Custom fields (if any) */}
       {Object.keys(task.customFields).length > 0 && (
-        <div className="mt-2 pt-2 border-t border-gray-200">
+        <div
+          className="mt-2 pt-2 border-t border-gray-200"
+          data-cy="custom-fields"
+        >
           <p className="text-xs text-gray-500 font-medium">Custom fields:</p>
           <div className="mt-1 text-xs text-gray-600">
             {Object.entries(task.customFields).map(([key, value]) => (
-              <div key={key}>
+              <div key={key} data-cy="custom-field">
                 <span className="font-medium">{key}:</span> {value}
               </div>
             ))}
