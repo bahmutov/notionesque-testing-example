@@ -363,7 +363,10 @@ const ListView: React.FC = () => {
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-          <div className="flex-1 flex justify-between sm:hidden">
+          <div
+            className="flex-1 flex justify-between sm:hidden"
+            data-cy="mobile-pagination"
+          >
             {/* Mobile pagination */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
@@ -376,7 +379,10 @@ const ListView: React.FC = () => {
             >
               Previous
             </button>
-            <span className="text-sm text-gray-700">
+            <span
+              className="text-sm text-gray-700 ml-1"
+              data-cy="pagination-info"
+            >
               Page {currentPage} of {totalPages}
             </span>
             <button
@@ -393,7 +399,10 @@ const ListView: React.FC = () => {
           </div>
 
           {/* Desktop pagination */}
-          <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+          <div
+            className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between"
+            data-cy="desktop-pagination"
+          >
             <div>
               <p className="text-sm text-gray-700" data-cy="pagination-info">
                 Showing{" "}
