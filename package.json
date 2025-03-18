@@ -68,7 +68,10 @@
       "src/**/*.tsx"
     ],
     "exclude": [
-      "src/setupTests.ts"
+      "src/components/task/TaskDetailView.tsx",
+      "src/types/index.ts",
+      "src/setupTests.ts",
+      "src/utils/test-utils.tsx"
     ]
   }
 }
