@@ -286,6 +286,7 @@ const ListView: React.FC = () => {
                     checked={selectedTaskIds.has(task.id)}
                     onChange={() => toggleTaskSelection(task.id)}
                     className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    data-cy="select-task"
                   />
                 </td>
                 <td className="px-6 py-4">
