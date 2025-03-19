@@ -65,9 +65,7 @@
       "src/**/*.tsx"
     ],
     "exclude": [
-      "src/types/index.ts",
-      "src/setupTests.ts",
-      "src/utils/test-utils.tsx"
+      "src/types/index.ts"
     ]
   }
 }
