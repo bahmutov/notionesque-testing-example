@@ -1,4 +1,4 @@
-import { defineConfig } from "vitest/config"
+import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 import tailwindcss from "@tailwindcss/vite"
 // https://github.com/iFaxity/vite-plugin-istanbul
@@ -20,11 +20,5 @@ export default defineConfig({
   },
   server: {
     open: false,
-  },
-  test: {
-    globals: true,
-    environment: "jsdom",
-    setupFiles: "src/setupTests",
-    mockReset: true,
   },
 })
