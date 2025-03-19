@@ -17,11 +17,11 @@ jobs:
           start: npm run dev
 
       - name: Set code coverage commit status 📫
-        run: node bin/set-gh-status
+        run: npx set-gh-status
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Check coverage change from README 📫
-        run: node bin/set-gh-status --check-against-readme
+        run: npx set-gh-status --check-against-readme
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
