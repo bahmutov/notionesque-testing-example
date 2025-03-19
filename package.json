@@ -50,6 +50,7 @@
     "cypress-map": "^1.45.1",
     "cypress-plugin-steps": "^1.1.1",
     "cypress-real-events": "^1.14.0",
+    "cypress-watch-and-reload": "^1.10.18",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-react-app": "^7.0.1",

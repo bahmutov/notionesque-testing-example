@@ -6,6 +6,7 @@ import "cypress-plugin-steps"
 import "cypress-map"
 import "cypress-real-events"
 import "cypress-cdp"
+import "cypress-watch-and-reload/support"
 
 Cypress.Commands.add("home", () => {
   cy.visit("/").wait(100)
