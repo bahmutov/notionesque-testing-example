@@ -5,7 +5,11 @@ declare namespace Cypress {
   type status = "Not Started" | "In Progress" | "Completed"
 
   interface Chainable {
-    home(): Chainable<void>
+    /**
+     * Go to the homepage and check the elements.
+     * @param zeroTasks - If true, check for zero tasks.
+     */
+    home(zeroTasks?: boolean): Chainable<void>
     addTask(
       title: string,
       description: string,

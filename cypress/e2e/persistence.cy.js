@@ -54,6 +54,9 @@ describe("App persistence", () => {
         })
         expect(items[1], "task 2 id").to.have.property("id").to.match(uuidRegex)
       })
+
+    cy.reload()
+    cy.get('[data-cy="task-row"]').should("have.length", 2)
   })
 
   it("persists the tasks (spok version)", () => {
@@ -178,5 +181,40 @@ describe("App persistence", () => {
           },
         ]),
       )
+  })
+
+  it("loads the state from local storage", () => {
+    cy.step('Set the local storage "persist:tasks"')
+    cy.fixture("3-tasks.json").then(tasks => {
+      cy.window()
+        .its("localStorage")
+        .invoke(
+          "setItem",
+          "persist:tasks",
+          JSON.stringify({
+            present: JSON.stringify({ items: tasks }),
+          }),
+        )
+      cy.home(false)
+      cy.section("Check shown items")
+      cy.get('[data-cy="task-row"]').should("have.length", tasks.length)
+      tasks.forEach((task, k) => {
+        cy.step(`Check task ${k + 1}`)
+        cy.get('[data-cy="task-row"]')
+          .eq(k)
+          .within(() => {
+            cy.get('[data-cy="task-title"]').should("have.text", task.title)
+            cy.get('[data-cy="task-description"]').should(
+              "have.text",
+              task.description,
+            )
+            cy.get('[data-cy="task-status"]').should("have.text", task.status)
+            cy.get('[data-cy="task-priority"]').should(
+              "have.text",
+              task.priority,
+            )
+          })
+      })
+    })
   })
 })

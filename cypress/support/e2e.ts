@@ -8,10 +8,12 @@ import "cypress-real-events"
 import "cypress-cdp"
 import "cypress-watch-and-reload/support"
 
-Cypress.Commands.add("home", () => {
+Cypress.Commands.add("home", (zeroTasks: boolean = true) => {
   cy.visit("/").wait(100)
   cy.contains("header", "Notionesque")
-  cy.get('[data-cy="zero-tasks"]').should("be.visible")
+  if (zeroTasks) {
+    cy.get('[data-cy="zero-tasks"]').should("be.visible")
+  }
   cy.get('[data-cy="search-input"]').should("be.visible")
 })
 
