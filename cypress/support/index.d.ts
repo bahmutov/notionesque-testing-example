@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 declare namespace Cypress {
   type priority = "None" | "Low" | "Medium" | "High" | "Urgent"
   type status = "Not Started" | "In Progress" | "Completed"
