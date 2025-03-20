@@ -13,12 +13,15 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+import "cypress-plugin-steps"
+import "cypress-map"
+
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands"
 
-import { mount } from 'cypress/react'
+import { mount } from "cypress/react"
 
-Cypress.Commands.add('mount', mount)
+Cypress.Commands.add("mount", mount)
 
 // Example use:
 // cy.mount(<MyComponent />)
