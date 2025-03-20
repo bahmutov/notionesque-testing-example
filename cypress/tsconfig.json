@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "strict": true,
     "allowJs": true,
     "types": ["cypress", "cypress-map", "cypress-plugin-steps"]
   },
