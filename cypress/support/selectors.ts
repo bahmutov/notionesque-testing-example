@@ -1,11 +1,11 @@
 /**
  * Selectors to be used when querying elements on the web page.
  * @example
- *  cy.get(Selectors.TaskModal.form)
+ *  cy.get(Selectors.taskModal.form)
  *    .within(() => { ... })
  */
 export const Selectors = {
-  TaskModal: {
+  taskModal: {
     form: '[data-cy="task-form"]',
     title: '[name="title"]',
     description: '[name="description"]',
@@ -13,19 +13,19 @@ export const Selectors = {
     createButton: 'button:contains("Create")',
     updateButton: 'button:contains("Update")',
   },
-  Filters: {
-    Search: '[data-cy="search-input"]',
-    Status: '[data-cy="search-status-filter"]',
-    Priority: '[data-cy="search-priority-filter"]',
+  filters: {
+    search: '[data-cy="search-input"]',
+    status: '[data-cy="search-status-filter"]',
+    priority: '[data-cy="search-priority-filter"]',
   },
-  Task: {
-    Row: '[data-cy="task-row"]',
-    Title: '[data-cy="task-title"]',
-    Status: '[data-cy="task-status"]',
-    Priority: '[data-cy="task-priority"]',
+  task: {
+    row: '[data-cy="task-row"]',
+    title: '[data-cy="task-title"]',
+    status: '[data-cy="task-status"]',
+    priority: '[data-cy="task-priority"]',
   },
-  ZeroTasks: '[data-cy="zero-tasks"]',
-  CustomFields: {
+  zeroTasks: '[data-cy="zero-tasks"]',
+  customFields: {
     container: '[data-cy="custom-fields"]',
     addField: '[data-cy="add-custom-field"]',
     newFieldName: '[data-cy="new-custom-field-name"]',
@@ -34,7 +34,7 @@ export const Selectors = {
     field: '[data-cy="custom-field"]',
     deleteButton: 'button:contains("Delete")',
   },
-  Kanban: {
+  kanban: {
     card: '[data-cy="kanban-card"]',
     viewButton: 'button:contains("Kanban")',
     editButton: 'button:contains("Edit")',
