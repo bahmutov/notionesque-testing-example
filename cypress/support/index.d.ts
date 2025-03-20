@@ -6,6 +6,8 @@ declare namespace Cypress {
     /**
      * Go to the homepage and check the elements.
      * @param zeroTasks - If true, check for zero tasks.
+     * @example cy.home()
+     * @example cy.home(true) // visit the homepage and check if there are zero tasks
      */
     home(zeroTasks?: boolean): Chainable<void>
 
@@ -15,6 +17,9 @@ declare namespace Cypress {
      * @param description - The description of the task.
      * @param priority - The priority of the task (optional).
      * @param status - The status of the task (optional).
+     * @example cy.addTask("Test Task", "Test Task Description")
+     * @example cy.addTask("Test Task", "Test Task Description", "High")
+     * @example cy.addTask("Test Task", "Test Task Description", "High", "In Progress")
      */
     addTask(
       title: string,

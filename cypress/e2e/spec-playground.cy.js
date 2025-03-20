@@ -22,7 +22,7 @@ describe("App", () => {
     ])
   })
 
-  it("starts with 5 tasks", () => {
+  it("immediately starts with 5 tasks", () => {
     cy.home()
 
     cy.addTasks([
