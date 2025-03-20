@@ -13,12 +13,12 @@ describe("App", () => {
     // Verify there are 4 task rows
     cy.get('[data-cy="task-row"]').should("have.length", 4)
 
-    // Verify the title of each task
+    // Verify the title of each task, the tasks are in reverse order of creation
     cy.get('[data-cy="task-title"]').should("read", [
-      "Complete project documentation",
-      "Review pull requests",
-      "Update dependencies",
       "Write unit tests",
+      "Update dependencies",
+      "Review pull requests",
+      "Complete project documentation",
     ])
   })
 })
