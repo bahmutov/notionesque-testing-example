@@ -42,7 +42,7 @@
     "cy-spok": "^1.5.2",
     "cypress": "^14.2.0",
     "cypress-cdp": "^1.6.51",
-    "cypress-map": "^1.45.1",
+    "cypress-map": "^1.46.0",
     "cypress-on-fix": "^1.1.0",
     "cypress-plugin-steps": "^1.1.1",
     "cypress-real-events": "^1.14.0",

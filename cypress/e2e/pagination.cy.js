@@ -1,5 +1,14 @@
 describe("App List View", () => {
-  it("shows paginated tasks", () => {
+  beforeEach(() => {
+    // disable network caching to download the real uuid.js
+    // script otherwise the "persistence.cy.js" will use the
+    // intercepted faked version with just a few uuids
+    cy.CDP("Network.setCacheDisabled", {
+      cacheDisabled: true,
+    })
+  })
+
+  beforeEach(() => {
     cy.home()
 
     const n = 60
@@ -15,7 +24,16 @@ describe("App List View", () => {
           },
         })
     }
+    cy.log("All task ids are distinct")
+    cy.window({ log: false })
+      .its("store", { log: false })
+      .invoke("getState")
+      .its("tasks.present.items")
+      .map("id")
+      .should("be.unique")
+  })
 
+  it("shows paginated tasks", () => {
     cy.step("Check the pagination")
     cy.get('[data-cy="task-row"]').should("have.length", 10)
     cy.get("[data-cy=desktop-pagination]")
@@ -98,24 +116,8 @@ describe("App List View", () => {
     "shows paginated tasks on mobile",
     { viewportWidth: 300, viewportHeight: 500 },
     () => {
-      cy.home()
-
-      const n = 60
-      cy.step(`Create ${n} tasks really quickly`)
-      for (let i = 1; i <= n; i++) {
-        cy.window({ log: false })
-          .its("store", { log: false })
-          .invoke({ log: false }, "dispatch", {
-            type: "tasks/addTask",
-            payload: {
-              title: `Test Task ${i}`,
-              description: `Test Task Description ${i}`,
-            },
-          })
-      }
-
       cy.step("Check the pagination")
-      cy.get('[data-cy="desktop-pagination"]').should("not.exist")
+      cy.get('[data-cy="desktop-pagination"]').should("not.be.visible")
       cy.get('[data-cy="mobile-pagination"]')
         .scrollIntoView()
         .should("be.visible")
@@ -147,22 +149,6 @@ describe("App List View", () => {
   )
 
   it("Selects and deselects the paginated tasks", () => {
-    cy.home()
-
-    const n = 60
-    cy.step(`Create ${n} tasks really quickly`)
-    for (let i = 1; i <= n; i++) {
-      cy.window({ log: false })
-        .its("store", { log: false })
-        .invoke({ log: false }, "dispatch", {
-          type: "tasks/addTask",
-          payload: {
-            title: `Test Task ${i}`,
-            description: `Test Task Description ${i}`,
-          },
-        })
-    }
-
     cy.step("Select the 3rd page")
     cy.get('[data-cy="desktop-pagination"]').contains("button", "3").click()
     cy.get("[data-cy=desktop-pagination]")
