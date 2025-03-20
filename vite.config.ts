@@ -11,7 +11,7 @@ export default defineConfig({
     tailwindcss(),
     IstanbulPlugin({
       include: "src/*",
-      exclude: ["node_modules", "cypress/", "*.cy.js"],
+      exclude: ["node_modules", "cypress", "*.cy.js", "coverage"],
       extension: [".js", ".jsx", ".ts", ".tsx"],
     }),
   ],
@@ -20,5 +20,8 @@ export default defineConfig({
   },
   server: {
     open: false,
+    watch: {
+      ignored: ["node_modules", "cypress", "*.cy.js", "coverage"],
+    },
   },
 })

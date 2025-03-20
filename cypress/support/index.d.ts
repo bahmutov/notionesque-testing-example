@@ -41,5 +41,16 @@ declare namespace Cypress {
      * ])
      */
     addTasks(tasks: unknown[]): Chainable<void>
+
+    //
+    // component testing
+    //
+
+    /**
+     * Mount a component with the Redux store.
+     * @param component - The component to mount.
+     * @example cy.mount(<Component />)
+     */
+    mount(component: React.ReactNode): Chainable<void>
   }
 }
