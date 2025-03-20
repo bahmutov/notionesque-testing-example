@@ -11,7 +11,7 @@ export default defineConfig({
     // baseUrl, etc
     baseUrl: "http://localhost:5173/",
     viewportHeight: 1000,
-
+    experimentalRunAllSpecs: true,
     env: {
       // watch all the source files and re-run the current
       // spec file when any of them change
