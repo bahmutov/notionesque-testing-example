@@ -145,4 +145,39 @@ describe("App List View", () => {
       })
     },
   )
+
+  it("Selects and deselects the paginated tasks", () => {
+    cy.home()
+
+    const n = 60
+    cy.step(`Create ${n} tasks really quickly`)
+    for (let i = 1; i <= n; i++) {
+      cy.window({ log: false })
+        .its("store", { log: false })
+        .invoke({ log: false }, "dispatch", {
+          type: "tasks/addTask",
+          payload: {
+            title: `Test Task ${i}`,
+            description: `Test Task Description ${i}`,
+          },
+        })
+    }
+
+    cy.step("Select the 3rd page")
+    cy.get('[data-cy="desktop-pagination"]').contains("button", "3").click()
+    cy.get("[data-cy=desktop-pagination]")
+      .find('[data-cy="pagination-info"]')
+      .should("have.text", "Showing 21 to 30 of 60 results")
+
+    cy.step("Select all")
+    cy.get('[data-cy="select-all"]').check()
+    cy.get('[data-cy="selected-tasks"]').should(
+      "have.text",
+      "10 tasks selected",
+    )
+
+    cy.step("Deselect all")
+    cy.get('[data-cy="select-all"]').uncheck()
+    cy.get('[data-cy="selected-tasks"]').should("not.exist")
+  })
 })
