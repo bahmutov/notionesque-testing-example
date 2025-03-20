@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Use custom Cypress commands
+
+- when writing Cypress tests use custom commands defined in [index.d.ts](mdc:cypress/support/index.d.ts) and [commands.ts](mdc:cypress/support/commands.ts)
