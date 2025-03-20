@@ -2,6 +2,7 @@ name: code-coverage-badge
 on:
   schedule:
     - cron: "0 0 * * *"
+  workflow_dispatch:
 jobs:
   test:
     runs-on: ubuntu-22.04
