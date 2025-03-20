@@ -10,4 +10,16 @@ export const Selectors = {
     title: '[name="title"]',
     description: '[name="description"]',
   },
+  Filters: {
+    Search: '[data-cy="search-input"]',
+    Status: '[data-cy="search-status-filter"]',
+    Priority: '[data-cy="search-priority-filter"]',
+  },
+  Task: {
+    Row: '[data-cy="task-row"]',
+    Title: '[data-cy="task-title"]',
+    Status: '[data-cy="task-status"]',
+    Priority: '[data-cy="task-priority"]',
+  },
+  ZeroTasks: '[data-cy="zero-tasks"]',
 }

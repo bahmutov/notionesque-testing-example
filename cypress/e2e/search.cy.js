@@ -1,3 +1,5 @@
+import { Selectors } from "../support/selectors"
+
 describe("App search", () => {
   it("finds task by partial text match", () => {
     cy.step("Create 3 tasks")
@@ -5,21 +7,21 @@ describe("App search", () => {
     cy.addTask("Write code", "Write code description")
     cy.addTask("Write tests", "Write tests description")
     cy.addTask("Write documentation", "Write documentation description")
-    cy.get('[data-cy="task-row"]').should("have.length", 3)
+    cy.get(Selectors.Task.Row).should("have.length", 3)
 
     cy.step("Search for task documentation")
-    cy.get('[data-cy="search-input"]')
+    cy.get(Selectors.Filters.Search)
       .should("have.attr", "placeholder", "Search tasks...")
       .type("documentation")
-    cy.get('[data-cy="task-row"]')
+    cy.get(Selectors.Task.Row)
       .should("have.length", 1)
-      .find("[data-cy=task-title]")
+      .find(Selectors.Task.Title)
       .should("have.text", "Write documentation")
 
     cy.step("Case-insensitive search")
-    cy.get('[data-cy="search-input"]').clear().type("WRITE C")
-    cy.get('[data-cy="task-row"]')
-      .find("[data-cy=task-title]")
+    cy.get(Selectors.Filters.Search).clear().type("WRITE C")
+    cy.get(Selectors.Task.Row)
+      .find(Selectors.Task.Title)
       .should("have.text", "Write code")
   })
 
@@ -34,23 +36,23 @@ describe("App search", () => {
       undefined,
       "Not Started",
     )
-    cy.get('[data-cy="task-row"]')
+    cy.get(Selectors.Task.Row)
       .should("have.length", 3)
-      .find('[data-cy="task-status"]')
+      .find(Selectors.Task.Status)
       .should("read", ["not started", "completed", "in progress"])
 
     cy.step('Filter the search by "Completed" status')
-    cy.get('[data-cy="search-status-filter"]').select("Completed")
-    cy.get('[data-cy="task-row"]')
+    cy.get(Selectors.Filters.Status).select("Completed")
+    cy.get(Selectors.Task.Row)
       .should("have.length", 1)
       .should("include.text", "Write tests")
 
-    cy.get('[data-cy="search-input"]').type("documentation")
-    cy.get('[data-cy="zero-tasks"]').should("be.visible")
+    cy.get(Selectors.Filters.Search).type("documentation")
+    cy.get(Selectors.ZeroTasks).should("be.visible")
 
     cy.step("Filter all status")
-    cy.get('[data-cy="search-status-filter"]').select("All Status")
-    cy.get('[data-cy="task-row"]')
+    cy.get(Selectors.Filters.Status).select("All Status")
+    cy.get(Selectors.Task.Row)
       .should("have.length", 1)
       .should("include.text", "Write documentation")
   })
@@ -61,19 +63,19 @@ describe("App search", () => {
     cy.addTask("Write code", "Write code description", "Urgent")
     cy.addTask("Write tests", "Write tests description", "Medium")
     cy.addTask("Write documentation", "Write documentation description", "Low")
-    cy.get('[data-cy="task-row"]')
+    cy.get(Selectors.Task.Row)
       .should("have.length", 3)
-      .find('[data-cy="task-priority"]')
+      .find(Selectors.Task.Priority)
       .should("read", ["low", "medium", "urgent"])
 
     cy.step('Filter tasks with "Low" priority')
-    cy.get('[data-cy="search-priority-filter"]').select("Low")
-    cy.get('[data-cy="task-row"]')
+    cy.get(Selectors.Filters.Priority).select("Low")
+    cy.get(Selectors.Task.Row)
       .should("have.length", 1)
       .should("include.text", "Write documentation")
 
     cy.step("Show all priorities")
-    cy.get('[data-cy="search-priority-filter"]').select("All Priorities")
-    cy.get('[data-cy="task-row"]').should("have.length", 3)
+    cy.get(Selectors.Filters.Priority).select("All Priorities")
+    cy.get(Selectors.Task.Row).should("have.length", 3)
   })
 })
