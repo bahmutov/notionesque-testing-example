@@ -1,66 +1,68 @@
+import { Selectors } from "../support/selectors"
+
 describe("App", () => {
   it("adds a task with custom fields", () => {
     cy.home()
     cy.contains("button", "Create Task").click()
 
     cy.step("Adding empty task does not work")
-    cy.get("form[data-cy=task-form]")
+    cy.get(Selectors.TaskModal.form)
       .should("be.visible")
       .within(() => {
-        cy.contains("button", "Create").click()
+        cy.get(Selectors.TaskModal.createButton).click()
       })
 
-    cy.get("form[data-cy=task-form]")
+    cy.get(Selectors.TaskModal.form)
       .should("be.visible")
       .within(() => {
-        cy.get("input[name=title]").type("My task")
-        cy.get("button[data-cy=toggle-custom-fields]").click()
-        cy.get("[data-cy=custom-fields]")
+        cy.get(Selectors.TaskModal.title).type("My task")
+        cy.get(Selectors.TaskModal.toggleCustomFields).click()
+        cy.get(Selectors.CustomFields.container)
           .should("be.visible")
           .within(() => {
-            cy.get('[data-cy="add-custom-field"]')
+            cy.get(Selectors.CustomFields.addField)
               .should("be.visible")
               .within(() => {
-                cy.get('[data-cy="new-custom-field-name"]').type("Task URL")
-                cy.get('[data-cy="new-custom-field-value"]').type(
+                cy.get(Selectors.CustomFields.newFieldName).type("Task URL")
+                cy.get(Selectors.CustomFields.newFieldValue).type(
                   "https://acme.com",
                 )
-                cy.contains("button", "Add Field").click()
+                cy.get(Selectors.CustomFields.addFieldButton).click()
               })
 
             cy.step("Confirm the custom field")
-            cy.get('[data-cy="custom-field"]').should("have.length", 1)
+            cy.get(Selectors.CustomFields.field).should("have.length", 1)
           })
-        cy.contains("button", "Create").click()
+        cy.get(Selectors.TaskModal.createButton).click()
       })
 
     cy.step("Confirm the created task")
-    cy.get("form[data-cy=task-form]").should("not.exist")
-    cy.contains("button", "Kanban").click()
-    cy.contains("[data-cy=kanban-card]", "My task")
-      .find('[data-cy="custom-field"]')
+    cy.get(Selectors.TaskModal.form).should("not.exist")
+    cy.get(Selectors.Kanban.viewButton).click()
+    cy.contains(Selectors.Kanban.card, "My task")
+      .find(Selectors.CustomFields.field)
       .should("have.length", 1)
       .first()
       .should("have.text", "Task URL: https://acme.com")
 
     cy.step("Edit the task and delete the custom field")
-    cy.contains("[data-cy=kanban-card]", "My task")
-      .contains("button", "Edit")
+    cy.contains(Selectors.Kanban.card, "My task")
+      .find(Selectors.Kanban.editButton)
       .click()
-    cy.get("form[data-cy=task-form]")
+    cy.get(Selectors.TaskModal.form)
       .should("be.visible")
       .within(() => {
-        cy.contains('[data-cy="custom-field"]', "Task URL")
-          .contains("button", "Delete")
+        cy.contains(Selectors.CustomFields.field, "Task URL")
+          .find(Selectors.CustomFields.deleteButton)
           .click()
-        cy.get('[data-cy="custom-field"]').should("not.exist")
-        cy.contains("button", "Update").click()
+        cy.get(Selectors.CustomFields.field).should("not.exist")
+        cy.get(Selectors.TaskModal.updateButton).click()
       })
 
     cy.step("Confirm the custom field is deleted")
-    cy.get("form[data-cy=task-form]").should("not.exist")
-    cy.contains("[data-cy=kanban-card]", "My task")
-      .find('[data-cy="custom-field"]')
+    cy.get(Selectors.TaskModal.form).should("not.exist")
+    cy.contains(Selectors.Kanban.card, "My task")
+      .find(Selectors.CustomFields.field)
       .should("not.exist")
   })
 })
