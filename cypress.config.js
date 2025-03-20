@@ -1,8 +1,8 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from "cypress"
 // https://github.com/bahmutov/cypress-code-coverage
-import codeCoverage from "@bahmutov/cypress-code-coverage/plugin";
+import codeCoverage from "@bahmutov/cypress-code-coverage/plugin"
 // https://github.com/bahmutov/cypress-watch-and-reload
-import reload from "cypress-watch-and-reload/plugins";
+import reload from "cypress-watch-and-reload/plugins"
 
 export default defineConfig({
   defaultBrowser: "electron",
@@ -21,12 +21,12 @@ export default defineConfig({
     },
 
     setupNodeEvents(on, config) {
-      codeCoverage(on, config);
-      reload(on, config);
+      codeCoverage(on, config)
+      // reload(on, config)
 
       // IMPORTANT to return the config object
       // with the any changed environment variables
-      return config;
+      return config
     },
   },
 
@@ -36,4 +36,4 @@ export default defineConfig({
       bundler: "vite",
     },
   },
-});
+})

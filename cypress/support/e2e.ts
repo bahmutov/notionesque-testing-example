@@ -6,7 +6,9 @@ import "cypress-plugin-steps"
 import "cypress-map"
 import "cypress-real-events"
 import "cypress-cdp"
-import "cypress-watch-and-reload/support"
+// import "cypress-watch-and-reload/support"
+
+import type { Task } from "../../src/types"
 
 Cypress.Commands.add("home", (zeroTasks: boolean = true) => {
   cy.visit("/").wait(100)
@@ -45,3 +47,20 @@ Cypress.Commands.add(
     cy.get("form[data-cy=task-form]").should("not.exist")
   },
 )
+
+Cypress.Commands.add("addTasks", (ts: unknown[]) => {
+  const tasks = ts as Task[]
+  cy.step(`Create ${tasks.length} tasks really quickly`)
+  for (let i = 0; i < tasks.length; i++) {
+    cy.window({ log: false })
+      .its("store", { log: false })
+      .invoke({ log: false }, "dispatch", {
+        type: "tasks/addTask",
+        payload: {
+          title: tasks[i].title as string,
+          description: tasks[i].description as string,
+        },
+      })
+  }
+  cy.get('[data-cy="task-row"]').should("have.length", tasks.length)
+})

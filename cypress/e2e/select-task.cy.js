@@ -1,13 +1,14 @@
 describe("App List View", () => {
-  it("selects and deletes one task", () => {
-    // create 3 tasks
-    // select the middle task using the selector "data-cy="select-task"
-
-    cy.step("Create 3 tasks")
+  beforeEach(() => {
     cy.home()
-    cy.addTask("Test Task 1", "Test Task Description 1")
-    cy.addTask("Test Task 2", "Test Task Description 2")
-    cy.addTask("Test Task 3", "Test Task Description 3")
+    cy.addTasks([
+      { title: "Test Task 1", description: "Test Task Description 1" },
+      { title: "Test Task 2", description: "Test Task Description 2" },
+      { title: "Test Task 3", description: "Test Task Description 3" },
+    ])
+  })
+
+  it("selects and deletes one task", () => {
     cy.get('[data-cy="task-row"]')
       .should("have.length", 3)
       .second()
@@ -23,11 +24,6 @@ describe("App List View", () => {
   })
 
   it("delete one of selected tasks", () => {
-    cy.step("Create 3 tasks")
-    cy.home()
-    cy.addTask("Test Task 1", "Test Task Description 1")
-    cy.addTask("Test Task 2", "Test Task Description 2")
-    cy.addTask("Test Task 3", "Test Task Description 3")
     cy.get('[data-cy="task-title"]').should("read", [
       "Test Task 3",
       "Test Task 2",
@@ -43,5 +39,34 @@ describe("App List View", () => {
       "Test Task 3",
       "Test Task 2",
     ])
+  })
+
+  it("selects tasks one by one", () => {
+    cy.get('[data-cy="task-row"]')
+      .first()
+      .find('[data-cy="select-task"]')
+      .check()
+    cy.get('[data-cy="selected-tasks"]').should("have.text", "1 task selected")
+    cy.get('[data-cy="task-row"]').eq(1).find('[data-cy="select-task"]').check()
+    cy.get('[data-cy="selected-tasks"]').should("have.text", "2 tasks selected")
+    cy.get('[data-cy="task-row"]').eq(2).find('[data-cy="select-task"]').check()
+    cy.get('[data-cy="selected-tasks"]').should("have.text", "3 tasks selected")
+
+    cy.step("Deselect the tasks one by one")
+    cy.get('[data-cy="task-row"]')
+      .first()
+      .find('[data-cy="select-task"]')
+      .uncheck()
+    cy.get('[data-cy="selected-tasks"]').should("have.text", "2 tasks selected")
+    cy.get('[data-cy="task-row"]')
+      .eq(1)
+      .find('[data-cy="select-task"]')
+      .uncheck()
+    cy.get('[data-cy="selected-tasks"]').should("have.text", "1 task selected")
+    cy.get('[data-cy="task-row"]')
+      .eq(2)
+      .find('[data-cy="select-task"]')
+      .uncheck()
+    cy.get('[data-cy="selected-tasks"]').should("not.exist")
   })
 })

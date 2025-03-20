@@ -16,5 +16,7 @@ declare namespace Cypress {
       priority?: priority,
       status?: status,
     ): Chainable<void>
+
+    addTasks(tasks: unknown[]): Chainable<void>
   }
 }
