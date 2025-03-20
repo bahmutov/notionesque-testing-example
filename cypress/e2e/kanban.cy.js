@@ -7,6 +7,19 @@ const dragAndDrop = (dragLocator, dropLocator) => {
   cy.get(dropLocator).realMouseMove(0, 0, { position: "center" }).realMouseUp()
 }
 describe("App Kanban", () => {
+  it("switches from List to Kanban and back", () => {
+    cy.home()
+    cy.contains("button", "List").should("have.attr", "data-active", "true")
+    cy.contains("button", "Kanban").should("have.attr", "data-active", "false")
+    cy.contains("button", "Kanban").click()
+    cy.contains("button", "List").should("have.attr", "data-active", "false")
+    cy.contains("button", "Kanban").should("have.attr", "data-active", "true")
+    cy.step("Go to List")
+    cy.contains("button", "List").click()
+    cy.contains("button", "List").should("have.attr", "data-active", "true")
+    cy.contains("button", "Kanban").should("have.attr", "data-active", "false")
+  })
+
   it("lets the user drag the tasks to change their priority", () => {
     cy.step("Create 3 tasks")
     cy.home()
