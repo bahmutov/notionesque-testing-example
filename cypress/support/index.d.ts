@@ -24,9 +24,16 @@ declare namespace Cypress {
     ): Chainable<void>
 
     /**
-     * Add multiple tasks.
+     * Add multiple tasks very quickly by calling the Redux actions.
      * @param tasks - An array of task objects. Each object should at least have
      * a `title` and a `description` property and `description` strings.
+     * @example
+     * cy.home()
+     * cy.addTasks([
+     *   { title: "Test Task 1", description: "Test Task Description 1" },
+     *   { title: "Test Task 2", description: "Test Task Description 2" },
+     *   { title: "Test Task 3", description: "Test Task Description 3" },
+     * ])
      */
     addTasks(tasks: unknown[]): Chainable<void>
   }

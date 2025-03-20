@@ -21,4 +21,31 @@ describe("App", () => {
       "Complete project documentation",
     ])
   })
+
+  it("starts with 5 tasks", () => {
+    cy.home()
+
+    cy.addTasks([
+      {
+        title: "Task 1",
+        description: "Description for task 1",
+      },
+      {
+        title: "Task 2",
+        description: "Description for task 2",
+      },
+      {
+        title: "Task 3",
+        description: "Description for task 3",
+      },
+      {
+        title: "Task 4",
+        description: "Description for task 4",
+      },
+      {
+        title: "Task 5",
+        description: "Description for task 5",
+      },
+    ])
+  })
 })
