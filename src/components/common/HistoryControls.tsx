@@ -13,6 +13,8 @@ const HistoryControls: React.FC = () => {
   const pastCount = useAppSelector(state => state.tasks.past.length)
   const futureCount = useAppSelector(state => state.tasks.future.length)
 
+  // console.log({ canUndo, canRedo })
+
   // Handle undo action
   const handleUndo = () => {
     if (canUndo) {
