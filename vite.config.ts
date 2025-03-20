@@ -20,6 +20,7 @@ export default defineConfig({
   },
   server: {
     open: false,
+    hmr: process.env.CI ? false : true,
     watch: {
       ignored: ["node_modules", "cypress", "*.cy.js", "coverage"],
     },
