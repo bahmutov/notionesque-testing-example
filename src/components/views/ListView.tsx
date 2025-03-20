@@ -242,6 +242,7 @@ const ListView: React.FC = () => {
                   onChange={toggleSelectAll}
                   className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   data-cy="select-all"
+                  disabled={filteredAndSortedTasks.length === 0}
                 />
               </th>
               <th

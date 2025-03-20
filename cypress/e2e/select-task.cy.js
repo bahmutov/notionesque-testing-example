@@ -69,4 +69,13 @@ describe("App List View", () => {
       .uncheck()
     cy.get('[data-cy="selected-tasks"]').should("not.exist")
   })
+
+  it("clears the store", () => {
+    cy.get('[data-cy="select-all"]').should("be.enabled")
+    cy.window().its("store").invoke({ log: false }, "dispatch", {
+      type: "tasks/deleteAllTasks",
+    })
+    cy.get('[data-cy="zero-tasks"]').should("be.visible")
+    cy.get('[data-cy="select-all"]').should("be.disabled")
+  })
 })
