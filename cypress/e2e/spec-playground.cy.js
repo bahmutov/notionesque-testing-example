@@ -48,4 +48,33 @@ describe("App", () => {
       },
     ])
   })
+
+  it("shows the same items in List and Kanban views", () => {
+    cy.home()
+
+    cy.addTasks([
+      { title: "Task 1", description: "Description 1", priority: "low" },
+      { title: "Task 2", description: "Description 2", priority: "medium" },
+      { title: "Task 3", description: "Description 3", priority: "high" },
+    ])
+
+    // first we are in the List view
+    cy.get('[data-cy="list-view"]').should("exist")
+    cy.get('[data-cy="kanban-view"]').should("not.exist")
+
+    // then we switch to the Kanban view
+    cy.contains("button", "Kanban").click()
+
+    // Verify we switched views
+    cy.get('[data-cy="list-view"]').should("not.exist")
+    cy.get('[data-cy="kanban-view"]').should("exist")
+    cy.get('[data-cy="kanban-card"]').should("have.length", 3)
+
+    // go back to the List view
+    cy.contains("button", "List").click()
+
+    // Verify we switched views
+    cy.get('[data-cy="list-view"]').should("exist")
+    cy.get('[data-cy="kanban-view"]').should("not.exist")
+  })
 })

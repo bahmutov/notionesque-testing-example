@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 .nyc_output/
 coverage/
+cypress/screenshots/

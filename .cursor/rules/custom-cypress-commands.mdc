@@ -1,9 +1,10 @@
 ---
 description: 
-globs: 
-alwaysApply: true
+globs: cypress/e2e/**
+alwaysApply: false
 ---
 # Use custom Cypress commands
 
 - when writing Cypress tests use custom commands defined in [index.d.ts](mdc:cypress/support/index.d.ts) and [commands.ts](mdc:cypress/support/commands.ts)
 - make the tests similar to other Cypress tests in the cypress/e2e folder
+- prefer using `data-cy` and `data-testid` attributes from the `src` folder. For elements without `data-cy` or `data-testid` attribute use its element name plus the text contents, like `cy.contains('button', 'Update')`

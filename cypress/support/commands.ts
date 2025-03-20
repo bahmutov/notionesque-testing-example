@@ -46,10 +46,7 @@ Cypress.Commands.add("addTasks", (ts: unknown[]) => {
       .its("store", { log: false })
       .invoke({ log: false }, "dispatch", {
         type: "tasks/addTask",
-        payload: {
-          title: tasks[i].title as string,
-          description: tasks[i].description as string,
-        },
+        payload: tasks[i],
       })
   }
   cy.get('[data-cy="task-row"]').should("have.length", tasks.length)

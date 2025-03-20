@@ -24,9 +24,15 @@ export const tasksSlice = createSlice({
       state,
       action: PayloadAction<Omit<Task, "id" | "createdAt" | "updatedAt">>,
     ) => {
+      const defaults = {
+        customFields: {},
+        priority: "none",
+        status: "not started",
+      }
+      const taskDetails = { ...defaults, ...action.payload }
       const now = new Date().toISOString()
       const newTask: Task = {
-        ...action.payload,
+        ...taskDetails,
         id: uuidv4(),
         createdAt: now,
         updatedAt: now,

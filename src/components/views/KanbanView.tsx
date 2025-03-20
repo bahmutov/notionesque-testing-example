@@ -61,6 +61,7 @@ const KanbanView: React.FC = () => {
 
     return grouped
   }, [filteredTasks])
+  // console.table(filteredTasks)
 
   // Handle drag end event
   const handleDragEnd = (result: DropResult) => {
