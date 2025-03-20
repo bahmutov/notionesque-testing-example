@@ -66,6 +66,10 @@ export const tasksSlice = createSlice({
       )
     },
 
+    deleteAllTasks: state => {
+      state.items = []
+    },
+
     // Update task priority (used in Kanban view when dragging)
     updateTaskPriority: (
       state,
@@ -109,6 +113,7 @@ export const {
   updateTask,
   deleteTask,
   deleteTasks,
+  deleteAllTasks,
   updateTaskPriority,
 } = tasksSlice.actions
 
