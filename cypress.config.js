@@ -2,7 +2,7 @@ import { defineConfig } from "cypress"
 // https://github.com/bahmutov/cypress-code-coverage
 import codeCoverage from "@bahmutov/cypress-code-coverage/plugin.js"
 // https://github.com/bahmutov/cypress-watch-and-reload
-import reload from "cypress-watch-and-reload/plugins"
+// import reload from "cypress-watch-and-reload/plugins.js"
 
 export default defineConfig({
   defaultBrowser: "electron",
