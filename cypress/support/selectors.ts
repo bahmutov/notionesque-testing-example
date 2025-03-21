@@ -22,6 +22,7 @@ export const Selectors = {
     row: '[data-cy="task-row"]',
     title: '[data-cy="task-title"]',
     status: '[data-cy="task-status"]',
+    description: '[data-cy="task-description"]',
     priority: '[data-cy="task-priority"]',
   },
   zeroTasks: '[data-cy="zero-tasks"]',
