@@ -2,13 +2,24 @@ describe("App", () => {
   it("loads 4 tasks", () => {
     cy.home()
 
-    cy.addTask(
-      "Complete project documentation",
-      "Document all features and APIs",
-    )
-    cy.addTask("Review pull requests", "Review and merge pending PRs")
-    cy.addTask("Update dependencies", "Update npm packages to latest versions")
-    cy.addTask("Write unit tests", "Add test coverage for core features")
+    cy.addTasks([
+      {
+        title: "Complete project documentation",
+        description: "Document all features and APIs",
+      },
+      {
+        title: "Review pull requests",
+        description: "Review and merge pending PRs",
+      },
+      {
+        title: "Update dependencies",
+        description: "Update npm packages to latest versions",
+      },
+      {
+        title: "Write unit tests",
+        description: "Add test coverage for core features",
+      },
+    ])
 
     // Verify there are 4 task rows
     cy.get('[data-cy="task-row"]').should("have.length", 4)
