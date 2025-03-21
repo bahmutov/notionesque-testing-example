@@ -30,6 +30,17 @@ export const tasksSlice = createSlice({
         status: "not started",
       }
       const taskDetails = { ...defaults, ...action.payload }
+
+      // confirm the priority is a valid value
+      const priorities = ["none", "low", "medium", "high", "urgent"]
+      if (!priorities.includes(taskDetails.priority)) {
+        throw new Error(`Invalid priority: ${taskDetails.priority}`)
+      }
+      const statuses = ["not started", "in progress", "completed"]
+      if (!statuses.includes(taskDetails.status)) {
+        throw new Error(`Invalid status: ${taskDetails.status}`)
+      }
+
       const now = new Date().toISOString()
       const newTask: Task = {
         ...taskDetails,
