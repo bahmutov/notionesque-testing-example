@@ -25,6 +25,12 @@ jobs:
           install: false
           component: true
 
+      - name: Save code coverage report 💾
+        uses: actions/upload-artifact@v4
+        with:
+          name: code-coverage
+          path: coverage
+
       - name: Set code coverage status ✅
         run: npx set-gh-status
         env:
