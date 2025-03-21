@@ -65,7 +65,8 @@
       "src/**/*.tsx"
     ],
     "exclude": [
-      "src/types/index.ts"
+      "src/types/index.ts",
+      "src/**/*.cy.tsx"
     ]
   }
 }
