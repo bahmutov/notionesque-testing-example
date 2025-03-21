@@ -26,3 +26,8 @@ jobs:
         with:
           install: false
           component: true
+
+      - name: Set code coverage status
+        run: npx set-gh-status
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
