@@ -1,10 +1,14 @@
+// @ts-check
+
 describe("App", () => {
   it("sorts tasks by title", () => {
     cy.step("Create 3 tasks")
     cy.home()
-    cy.addTask("Task 1", "Task 1 Description")
-    cy.addTask("Task 2", "Task 2 Description")
-    cy.addTask("Task 3", "Task 3 Description")
+    cy.addTasks([
+      { title: "Task 1", description: "Task 1 Description" },
+      { title: "Task 2", description: "Task 2 Description" },
+      { title: "Task 3", description: "Task 3 Description" },
+    ])
     cy.get('[data-cy="task-row"]').should("have.length", 3)
 
     cy.step('Sort by "Title" descending')
@@ -29,10 +33,14 @@ describe("App", () => {
   it("sorts tasks by priority", () => {
     cy.step("Create 3 tasks")
     cy.home()
-    cy.addTask("Task 1", "Task 1 Description", "Low")
-    cy.addTask("Task 2", "Task 2 Description", "High")
-    cy.addTask("Task 3", "Task 3 Description")
+    cy.addTasks([
+      { title: "Task 1", description: "Task 1 Description", priority: "low" },
+      { title: "Task 2", description: "Task 2 Description", priority: "high" },
+      { title: "Task 3", description: "Task 3 Description" },
+    ])
     cy.get('[data-cy="task-row"]').should("have.length", 3)
+    cy.step("initial priority")
+    cy.get("[data-cy=task-priority]").should("read", ["none", "high", "low"])
 
     cy.step('Sort by "Priority" ascending')
     cy.get('[data-cy="task-priority-header"]').click()
@@ -53,9 +61,23 @@ describe("App", () => {
   it("sorts tasks by status", () => {
     cy.step("Create 3 tasks")
     cy.home()
-    cy.addTask("Task 1", "Task 1 Description", undefined, "In Progress")
-    cy.addTask("Task 2", "Task 2 Description", undefined, "Completed")
-    cy.addTask("Task 3", "Task 3 Description", undefined, "Not Started")
+    cy.addTasks([
+      {
+        title: "Task 1",
+        description: "Task 1 Description",
+        status: "in progress",
+      },
+      {
+        title: "Task 2",
+        description: "Task 2 Description",
+        status: "completed",
+      },
+      {
+        title: "Task 3",
+        description: "Task 3 Description",
+        status: "not started",
+      },
+    ])
     cy.get('[data-cy="task-row"]').should("have.length", 3)
 
     cy.step("Initial status column")

@@ -51,6 +51,7 @@ describe("App List View", () => {
     cy.get('[data-cy="selected-tasks"]').should("have.text", "2 tasks selected")
     cy.get('[data-cy="task-row"]').eq(2).find('[data-cy="select-task"]').check()
     cy.get('[data-cy="selected-tasks"]').should("have.text", "3 tasks selected")
+    cy.get('[data-cy="select-all"]').should("be.checked")
 
     cy.step("Deselect the tasks one by one")
     cy.get('[data-cy="task-row"]')
@@ -58,6 +59,8 @@ describe("App List View", () => {
       .find('[data-cy="select-task"]')
       .uncheck()
     cy.get('[data-cy="selected-tasks"]').should("have.text", "2 tasks selected")
+    cy.get('[data-cy="select-all"]').should("not.be.checked")
+
     cy.get('[data-cy="task-row"]')
       .eq(1)
       .find('[data-cy="select-task"]')

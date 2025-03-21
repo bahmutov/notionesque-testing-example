@@ -2,6 +2,13 @@ declare namespace Cypress {
   type priority = "None" | "Low" | "Medium" | "High" | "Urgent"
   type status = "Not Started" | "In Progress" | "Completed"
 
+  interface TaskDetails {
+    title: string
+    description?: string
+    priority?: "none" | "low" | "medium" | "high" | "urgent"
+    status?: "not started" | "in progress" | "completed"
+  }
+
   interface Chainable {
     /**
      * Go to the homepage and check the elements.
@@ -40,7 +47,7 @@ declare namespace Cypress {
      *   { title: "Test Task 3", description: "Test Task Description 3" },
      * ])
      */
-    addTasks(tasks: unknown[]): Chainable<void>
+    addTasks(tasks: TaskDetails[]): Chainable<void>
 
     //
     // component testing
