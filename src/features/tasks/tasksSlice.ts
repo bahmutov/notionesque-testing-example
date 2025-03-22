@@ -136,6 +136,3 @@ export const {
 
 // Export the reducer
 export default undoableTasksReducer
-
-// Selector to get all tasks
-export const selectAllTasks = (state: any) => state.tasks.present.items
