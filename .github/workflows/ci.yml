@@ -31,7 +31,7 @@ jobs:
           start: npm run dev
           # run specs in the order of Git modification
           # the latest specs will be run first
-          specs: ${{ steps.find-specs.outputs.changedSpecs }}
+          spec: ${{ steps.find-specs.outputs.changedSpecs }}
 
       - name: Run component tests 🧪
         uses: cypress-io/github-action@v6
