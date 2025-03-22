@@ -10,6 +10,12 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v4
+        with:
+          # fetch all history to get the full commit history
+          # this is needed to get the correct order of specs
+          # by modified Git timestamp
+          fetch-depth: 0
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
