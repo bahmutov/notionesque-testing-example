@@ -23,6 +23,8 @@ jobs:
         id: find-specs
         # sets the outputs "changedSpecs" and "changedSpecsN"
         run: npx find-cypress-specs --sort-by-modified --set-gha-outputs
+        env:
+          DEBUG: find-cypress-specs
 
       - name: Run E2E tests 🧪
         uses: cypress-io/github-action@v6
