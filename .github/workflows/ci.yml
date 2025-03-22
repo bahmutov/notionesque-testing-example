@@ -14,10 +14,24 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install dependencies 📦
+        uses: cypress-io/github-action@v6
+        with:
+          runTests: false
+
+      - name: Find E2E specs 🔍
+        id: find-specs
+        # sets the outputs "changedSpecs" and "changedSpecsN"
+        run: npx find-cypress-specs --sort-by-modified --set-gha-outputs
+
       - name: Run E2E tests 🧪
         uses: cypress-io/github-action@v6
         with:
+          install: false
           start: npm run dev
+          # run specs in the order of Git modification
+          # the latest specs will be run first
+          specs: ${{ steps.find-specs.outputs.changedSpecs }}
 
       - name: Run component tests 🧪
         uses: cypress-io/github-action@v6
