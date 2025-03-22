@@ -23,7 +23,7 @@ export default defineConfig({
     // no need to hot reload in CI
     hmr: process.env.CI ? false : true,
     watch: {
-      ignored: ["node_modules", "cypress", "*.cy.js", "coverage"],
+      ignored: ["node_modules", "cypress", "cypress/**/*.cy.*", "coverage"],
     },
   },
 })
