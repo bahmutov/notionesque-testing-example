@@ -7,5 +7,7 @@ import "cypress-map"
 import "cypress-real-events"
 import "cypress-cdp"
 // import "cypress-watch-and-reload/support"
+import "cypress-fail-fast"
 
+// custom commands in this project
 import "./commands"
