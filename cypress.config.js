@@ -3,6 +3,8 @@ import { defineConfig } from "cypress"
 import codeCoverage from "@bahmutov/cypress-code-coverage/plugin.js"
 // https://github.com/bahmutov/cypress-watch-and-reload
 // import reload from "cypress-watch-and-reload/plugins.js"
+// https://github.com/javierbrea/cypress-fail-fast
+import cypressFailFast from "cypress-fail-fast/plugin.js"
 
 export default defineConfig({
   defaultBrowser: "electron",
@@ -23,6 +25,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       codeCoverage(on, config)
       // reload(on, config)
+      cypressFailFast(on, config)
 
       // IMPORTANT to return the config object
       // with the any changed environment variables
