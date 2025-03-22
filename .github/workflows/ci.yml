@@ -10,14 +10,36 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v4
+        with:
+          # fetch all history to get the full commit history
+          # this is needed to get the correct order of specs
+          # by modified Git timestamp
+          fetch-depth: 0
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
 
+      - name: Install dependencies 📦
+        uses: cypress-io/github-action@v6
+        with:
+          runTests: false
+
+      - name: Find E2E specs 🔍
+        id: find-specs
+        # sets the outputs "changedSpecs" and "changedSpecsN"
+        run: npx find-cypress-specs --sort-by-modified --set-gha-outputs
+        env:
+          DEBUG: find-cypress-specs
+
       - name: Run E2E tests 🧪
         uses: cypress-io/github-action@v6
         with:
+          install: false
           start: npm run dev
+          # run specs in the order of Git modification
+          # the latest specs will be run first
+          spec: ${{ steps.find-specs.outputs.changedSpecs }}
 
       - name: Run component tests 🧪
         uses: cypress-io/github-action@v6

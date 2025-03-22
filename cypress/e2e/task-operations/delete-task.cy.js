@@ -76,7 +76,7 @@ describe("App", () => {
     cy.get('[data-cy="zero-tasks"]').should("be.visible")
   })
 
-  it("does not delete all tasks if the user cancels", () => {
+  it("does not delete all tasks if the user cancels the Delete", () => {
     cy.step("Create a task")
     cy.home()
 
