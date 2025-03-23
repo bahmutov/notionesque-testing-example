@@ -9,7 +9,6 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v4
-
       - name: Run tests 🧪
         uses: cypress-io/github-action@v6
         with:
@@ -25,3 +24,4 @@ jobs:
           commit_message: Updated code coverage badge
           branch: main
           file_pattern: README.md
+          push_options: --force
