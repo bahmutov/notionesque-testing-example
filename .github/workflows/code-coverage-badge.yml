@@ -9,6 +9,10 @@ jobs:
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+          persist-credentials: true
+
       - name: Run tests 🧪
         uses: cypress-io/github-action@v6
         with:
