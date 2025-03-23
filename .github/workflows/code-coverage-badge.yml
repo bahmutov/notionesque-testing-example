@@ -10,7 +10,7 @@ jobs:
       - name: Checkout 🛎
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PAT }}
+          token: ${{ secrets.CODE_COVERAGE_PAT }}
           persist-credentials: true
 
       - name: Run tests 🧪
@@ -28,4 +28,3 @@ jobs:
           commit_message: Updated code coverage badge
           branch: main
           file_pattern: README.md
-          push_options: --force
