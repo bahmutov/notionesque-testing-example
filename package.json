@@ -45,7 +45,7 @@
     "cypress-fail-fast": "^7.1.1",
     "cypress-map": "^1.46.0",
     "cypress-on-fix": "^1.1.0",
-    "cypress-plugin-steps": "^1.1.1",
+    "cypress-plugin-steps": "^1.2.0",
     "cypress-real-events": "^1.14.0",
     "cypress-watch-and-reload": "^1.10.18",
     "eslint": "^8.56.0",

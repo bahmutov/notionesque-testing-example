@@ -32,6 +32,7 @@ describe("App Kanban", () => {
         cy.contains("button", "Update").click()
       })
 
+    cy.section("Checking")
     cy.step("Confirm the updated task")
     cy.get("[data-column=priority-none]")
       .find("[data-cy=kanban-card]")
@@ -42,5 +43,7 @@ describe("App Kanban", () => {
       .find("[data-cy=title]")
       .should("have.text", "Updated task")
       .scrollIntoView()
+
+    cy.todo("Check the task description")
   })
 })
